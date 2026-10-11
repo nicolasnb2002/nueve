@@ -17,7 +17,7 @@ export function Shell({ children }: { children: ReactNode }) {
             Nueve
           </Link>
           <p className="font-mono text-sm text-muted tabular-nums">
-            {done}/18
+            {done}/{concepts.length}
           </p>
         </div>
       </header>

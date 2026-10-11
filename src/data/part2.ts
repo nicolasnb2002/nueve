@@ -280,7 +280,7 @@ export const part2: Concept[] = [
     blocks: [
       {
         kind: "p",
-        text: "Son dos hipótesis, no un menú para mezclar hasta que el backtest sonría. Las dos tienen literatura y las dos pueden morir. El trabajo es entender qué apuesta cada una antes de mirar la variante concreta del paper.",
+        text: "Son dos hipótesis, no un menú para mezclar hasta que el backtest sonría. Las dos tienen literatura y las dos pueden morir. El trabajo es entender qué apuesta cada una antes de mirar una variante concreta.",
       },
       {
         kind: "h",
@@ -556,7 +556,7 @@ export const part2: Concept[] = [
       },
       {
         kind: "note",
-        text: "En el veredicto: acá se corta la frase. Histórico filtrado, forward todavía no vivido. «Funciona» sería una oración en futuro. El paper no la dice.",
+        text: "En el veredicto: acá se corta la frase. Histórico filtrado, forward todavía no vivido. «Funciona» sería una oración en futuro. Un informe honesto no la dice.",
       },
       { kind: "figure", id: "fwd" },
     ],

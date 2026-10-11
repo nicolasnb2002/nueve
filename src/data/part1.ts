@@ -81,7 +81,7 @@ export const part1: Concept[] = [
         why: "Curtosis 3 es la normal (exceso de curtosis 0). Por encima de 3, las colas están más gordas que la campana. Ojo: algunos softwares reportan el exceso, no la curtosis cruda.",
       },
       {
-        q: "Dos estrategias tienen la misma media y el mismo desvío. Una tiene asimetría −1,5 y la otra 0. ¿Cuál desconfía más el filtro del paper?",
+        q: "Dos estrategias tienen la misma media y el mismo desvío. Una tiene asimetría −1,5 y la otra 0. ¿Cuál desconfía más un filtro que mira la forma de la distribución?",
         options: [
           "Ninguna: el Sharpe ya las resume",
           "La de asimetría 0, porque es «demasiado normal»",
@@ -212,7 +212,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "La convención honesta por defecto: la señal se calcula con información hasta el cierre de t, y la orden se ejecuta en t+1 (el open, o el close siguiente, congelado de antemano). Llenar en el cierre de t supone que operaste el precio que fabricó la señal, cuando ese precio recién existe al terminar la barra. Sin un modelo intradiario de verdad, t+1 es la regla. El paper la nombra porque es la diferencia entre una curva que se puede discutir y una que ya se mintió.",
+        text: "La convención honesta por defecto: la señal se calcula con información hasta el cierre de t, y la orden se ejecuta en t+1 (el open, o el close siguiente, congelado de antemano). Llenar en el cierre de t supone que operaste el precio que fabricó la señal, cuando ese precio recién existe al terminar la barra. Sin un modelo intradiario de verdad, t+1 es la regla. Se nombra porque es la diferencia entre una curva que se puede discutir y una que ya se mintió.",
       },
       {
         kind: "example",
@@ -569,7 +569,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "note",
-        text: "En el veredicto: un p lindo sobre la ganadora de una búsqueda no alcanza para «PASA». El paper no se apoya en el p crudo. Lo reemplaza, en el centro, por un filtro que sabe cuántas veces preguntaste.",
+        text: "En el veredicto: un p lindo sobre la ganadora de una búsqueda no alcanza para «PASA». Un método serio no se apoya en el p crudo. Lo reemplaza, en el centro, por un filtro que sabe cuántas veces preguntaste.",
       },
       { kind: "figure", id: "pval" },
     ],
@@ -743,7 +743,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "Bonferroni es la versión brusca: usá 0,05 / N. Es simple y conservador cuando los tests no son independientes. El filtro central del paper no es ese corte duro: es el Deflated Sharpe, que sube el obstáculo de forma continua con N. Pero el DSR come el N que le des. Un intento fallido que no anotaste vuelve al DSR más optimista que la búsqueda real.",
+        text: "Bonferroni es la versión brusca: usá 0,05 / N. Es simple y conservador cuando los tests no son independientes. El filtro central de este recorrido no es ese corte duro: es el Deflated Sharpe, que sube el obstáculo de forma continua con N. Pero el DSR come el N que le des. Un intento fallido que no anotaste vuelve al DSR más optimista que la búsqueda real.",
       },
       {
         kind: "ul",

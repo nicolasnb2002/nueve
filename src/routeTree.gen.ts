@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CierreRouteImport } from './routes/cierre'
+import { Route as GlosarioRouteImport } from './routes/glosario'
 import { Route as ConceptoIdRouteImport } from './routes/concepto.$id'
 import { Route as DiaDiaRouteImport } from './routes/dia.$dia'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const CierreRoute = CierreRouteImport.update({
   id: '/cierre',
   path: '/cierre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GlosarioRoute = GlosarioRouteImport.update({
+  id: '/glosario',
+  path: '/glosario',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConceptoIdRoute = ConceptoIdRouteImport.update({
@@ -38,12 +44,14 @@ const DiaDiaRoute = DiaDiaRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cierre': typeof CierreRoute
+  '/glosario': typeof GlosarioRoute
   '/concepto/$id': typeof ConceptoIdRoute
   '/dia/$dia': typeof DiaDiaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cierre': typeof CierreRoute
+  '/glosario': typeof GlosarioRoute
   '/concepto/$id': typeof ConceptoIdRoute
   '/dia/$dia': typeof DiaDiaRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cierre': typeof CierreRoute
+  '/glosario': typeof GlosarioRoute
   '/concepto/$id': typeof ConceptoIdRoute
   '/dia/$dia': typeof DiaDiaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cierre' | '/concepto/$id' | '/dia/$dia'
+  fullPaths: '/' | '/cierre' | '/glosario' | '/concepto/$id' | '/dia/$dia'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cierre' | '/concepto/$id' | '/dia/$dia'
-  id: '__root__' | '/' | '/cierre' | '/concepto/$id' | '/dia/$dia'
+  to: '/' | '/cierre' | '/glosario' | '/concepto/$id' | '/dia/$dia'
+  id: '__root__' | '/' | '/cierre' | '/glosario' | '/concepto/$id' | '/dia/$dia'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CierreRoute: typeof CierreRoute
+  GlosarioRoute: typeof GlosarioRoute
   ConceptoIdRoute: typeof ConceptoIdRoute
   DiaDiaRoute: typeof DiaDiaRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/cierre'
       fullPath: '/cierre'
       preLoaderRoute: typeof CierreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/glosario': {
+      id: '/glosario'
+      path: '/glosario'
+      fullPath: '/glosario'
+      preLoaderRoute: typeof GlosarioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/concepto/$id': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CierreRoute: CierreRoute,
+  GlosarioRoute: GlosarioRoute,
   ConceptoIdRoute: ConceptoIdRoute,
   DiaDiaRoute: DiaDiaRoute,
 }

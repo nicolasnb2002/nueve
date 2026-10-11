@@ -5,6 +5,7 @@ import { Blocks } from "@/components/blocks";
 import { Quiz } from "@/components/quiz";
 import { Shell } from "@/components/shell";
 import { Missing } from "@/components/ui";
+import { criollo } from "@/data/criollo";
 
 export const Route = createFileRoute("/concepto/$id")({ component: ConceptPage });
 
@@ -38,6 +39,12 @@ function ConceptPage() {
       </p>
       <h1 className="mt-3 font-serif text-4xl leading-tight">{concept.title}</h1>
       <p className="mt-4 font-serif text-xl text-muted italic">{concept.promise}</p>
+      {criollo[concept.id] ? (
+        <p className="note mt-6">
+          <span className="text-fg">En criollo: </span>
+          {criollo[concept.id]}
+        </p>
+      ) : null}
       <div className="mt-8">
         <Blocks blocks={concept.blocks} />
       </div>
