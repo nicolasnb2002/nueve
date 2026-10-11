@@ -120,7 +120,7 @@ function LiqFig() {
   const [lev, setLev] = useState(10);
   const mm = 0.005;
   const drop = Math.max(1 / lev - mm, 0);
-  const pts = Array.from({ length: 50 }, (_, i) => i + 1).map((L) => [L, Math.max(1 / L - mm, 0) * 100] as const);
+  const pts = Array.from({ length: 49 }, (_, i) => i + 2).map((L) => [L, Math.max(1 / L - mm, 0) * 100] as const);
   const W = 320;
   const H = 140;
   const x = (L: number) => 30 + ((L - 1) / 49) * (W - 40);
@@ -130,7 +130,7 @@ function LiqFig() {
       <Slider label="Apalancamiento" min={1} max={50} step={1} value={lev} onChange={setLev} display={`${lev}x`} />
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Caída hasta liquidación según apalancamiento">
         <polyline fill="none" stroke="var(--color-mark)" strokeWidth={2} points={pts.map(([L, d]) => `${x(L)},${y(d)}`).join(" ")} />
-        <circle cx={x(lev)} cy={y(drop * 100)} r={4} fill="var(--color-fail)" />
+        <circle cx={x(lev)} cy={y(Math.min(drop * 100, 50))} r={4} fill="var(--color-fail)" />
         <text x={2} y={y(50) + 4} fontSize="10" fill="var(--color-muted)">50%</text>
         <text x={2} y={y(0) + 4} fontSize="10" fill="var(--color-muted)">0%</text>
         <text x={x(1)} y={H - 4} fontSize="10" fill="var(--color-muted)">1x</text>

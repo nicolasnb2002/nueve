@@ -212,13 +212,13 @@ export const part2: Concept[] = [
           { k: "Marzo", v: "100 → 104. Eso sí es PnL del long." },
           { k: "Junio, el mismo día", v: "Cotiza 108." },
           { k: "Empalme crudo", v: "104 → 108, un +3,8% que no cobraste." },
-          { k: "Back-adjust", v: "Se corre junio −4, y el día del roll la serie no salta." },
+          { k: "Back-adjust", v: "Se corre la historia anterior +4 (o junio −4; elegí una y congelala), y el día del roll la serie no salta." },
           { k: "Carry del ejemplo", v: "108 contra 104 en el tramo: contango, carry negativo para el long." },
         ],
       },
       {
         kind: "note",
-        text: "En el veredicto: la fase 3 necesita esta distinción. La tendencia se calcula sobre el retorno continuo. El carry se calcula con la pendiente que te acabás de negar a llamar «salto de precio».",
+        text: "En el veredicto: testear tendencia y carry necesita esta distinción. La tendencia se calcula sobre el retorno continuo. El carry se calcula con la pendiente que te acabás de negar a llamar «salto de precio».",
       },
       { kind: "figure", id: "roll" },
     ],
@@ -275,7 +275,7 @@ export const part2: Concept[] = [
     day: 7,
     title: "Tendencia y carry",
     minutes: 50,
-    promise: "Separar las dos ideas de la fase 3, y aceptar que en el mismo mercado pueden decir lo contrario.",
+    promise: "Separar dos ideas clásicas, y aceptar que en el mismo mercado pueden decir lo contrario.",
     line: "Tendencia es el signo de tu propio pasado. Carry es el signo de la pendiente. Pueden disentir.",
     blocks: [
       {
@@ -288,7 +288,7 @@ export const part2: Concept[] = [
       },
       {
         kind: "p",
-        text: "La referencia de manual es Moskowitz, Ooi y Pedersen (2012): el signo del pasado de un instrumento predice su propio futuro, en futuros y a través de clases de activo. La versión de libro: mirar 12 meses, saltear el mes más reciente (para no confundirse con el rebote de corto plazo), long si ese retorno fue positivo, short si fue negativo. Es time-series: cada mercado contra su historia, no contra los otros. Podés estar long en todos a la vez. No es el momentum cruzado de «compro ganadores y vendo perdedores del universo».",
+        text: "La referencia de manual es Moskowitz, Ooi y Pedersen (2012): el signo del pasado de un instrumento predice su propio futuro, en futuros y a través de clases de activo. La versión de libro: mirar el retorno de los últimos 12 meses, long si ese retorno fue positivo, short si fue negativo. Algunas implementaciones saltean el último mes, una convención heredada del momentum cruzado (12−1); si se usa, va escrita en el pre-registro. Es time-series: cada mercado contra su historia, no contra los otros. Podés estar long en todos a la vez. No es el momentum cruzado de «compro ganadores y vendo perdedores del universo».",
       },
       {
         kind: "p",
@@ -306,7 +306,7 @@ export const part2: Concept[] = [
         kind: "example",
         title: "El mismo mercado, dos signos",
         rows: [
-          { k: "Precio", v: "+14% en 12 meses, salteando el último" },
+          { k: "Precio", v: "+14% en 12 meses" },
           { k: "Tendencia", v: "Long" },
           { k: "Curva", v: "Front 80, contrato a un año 86" },
           { k: "Carry", v: "Contango → short" },
@@ -316,7 +316,7 @@ export const part2: Concept[] = [
       },
       {
         kind: "note",
-        text: "En el veredicto: la fase 3 testea ideas congeladas con la misma higiene, no una historia que se edita hasta calzar. Un pase de la tendencia no es un pase del carry, ni al revés.",
+        text: "En el veredicto: un test serio usa ideas congeladas con la misma higiene, no una historia que se edita hasta calzar. Un pase de la tendencia no es un pase del carry, ni al revés.",
       },
       { kind: "figure", id: "signals" },
     ],
@@ -333,7 +333,7 @@ export const part2: Concept[] = [
         why: "Es contra la propia historia. El momentum cruzado es otra estrategia, con otro N si también la probás.",
       },
       {
-        q: "¿Para qué se saltea, en el diseño clásico, el mes más reciente?",
+        q: "En el momentum cruzado clásico (12−1), ¿para qué se saltea el mes más reciente?",
         options: [
           "Para tener look-ahead controlado",
           "Para no mezclar la señal de 12 meses con el rebote de muy corto plazo",
@@ -341,7 +341,7 @@ export const part2: Concept[] = [
           "Para bajar el MaxDD a cero",
         ],
         answer: 1,
-        why: "Es parte del diseño de Moskowitz, Ooi y Pedersen, por el reversal de corto plazo. Tiene que estar escrito antes, no elegido porque en tu muestra quedaba mejor.",
+        why: "Es la convención del momentum cruzado (Jegadeesh-Titman; Asness, Moskowitz y Pedersen), por el reversal de corto plazo entre acciones. El TSMOM de Moskowitz, Ooi y Pedersen usa los 12 meses completos. Sea cual sea la elección, tiene que estar escrita antes, no elegida porque en tu muestra quedaba mejor.",
       },
       {
         q: "Front en 80 y el contrato a un año en 86. El carry del long es",
@@ -618,7 +618,7 @@ export const part2: Concept[] = [
     blocks: [
       {
         kind: "p",
-        text: "La potencia es la probabilidad de ver el edge si de verdad está. Con poca historia, un Sharpe verdadero de 0,5 es casi invisible: vas a decir «acá no hay nada» muchas veces en las que sí hay, y un tramo corto con suerte igual puede gritar. Las dos errores viven en la muestra chica.",
+        text: "La potencia es la probabilidad de ver el edge si de verdad está. Con poca historia, un Sharpe verdadero de 0,5 es casi invisible: vas a decir «acá no hay nada» muchas veces en las que sí hay, y un tramo corto con suerte igual puede gritar. Los dos errores viven en la muestra chica.",
       },
       {
         kind: "formula",
@@ -689,7 +689,7 @@ export const part2: Concept[] = [
     title: "Controles positivos y de falsos positivos",
     minutes: 50,
     promise: "No creerle a un banco de pruebas que no vio un edge plantado y que deja pasar al ruido.",
-    line: "El banco tiene que ver el edge plantado y rechazar los que no tienen edge, antes de creerle a la fase 3.",
+    line: "El banco tiene que ver el edge plantado y rechazar los que no tienen edge, antes de creerle al test de las reglas reales.",
     blocks: [
       {
         kind: "p",
@@ -713,7 +713,7 @@ export const part2: Concept[] = [
       },
       {
         kind: "p",
-        text: "El orden de la fase 3 es este: controles primero, reglas pre-registradas después. Nunca al revés. Un DSR verde sobre la tendencia no significa nada si el mismo botón se pone verde sobre ruido.",
+        text: "El orden del test es este: controles primero, reglas pre-registradas después. Nunca al revés. Un DSR verde sobre la tendencia no significa nada si el mismo botón se pone verde sobre ruido.",
       },
       {
         kind: "example",
@@ -722,7 +722,7 @@ export const part2: Concept[] = [
           { k: "Plantada", v: "30 años, Sharpe verdadero cerca de 1, registrada como control (N = 1 para ella)." },
           { k: "Test ingenuo", v: "La plantada pasa, y algunas de las 50 también." },
           { k: "Filtro", v: "La plantada sigue pasando. Las 50, con N = 50, no." },
-          { k: "Si no pasa eso", v: "No se corre la fase 3. Se arregla el motor." },
+          { k: "Si no pasa eso", v: "No se testean las reglas reales. Se arregla el motor." },
         ],
       },
       {
@@ -766,7 +766,7 @@ export const part2: Concept[] = [
         why: "El filtro de producción tiene que dejar la tasa de falsos pases en esencialmente cero sobre el banco de ruido. Si un nulo pasa, la barra no sirve todavía.",
       },
       {
-        q: "¿En qué orden se corre la fase 3?",
+        q: "¿En qué orden se corre el test de las reglas reales?",
         options: [
           "Primero la tendencia, y si pasa se construye el arnés",
           "Primero los controles del motor, después las reglas pre-registradas",

@@ -3,7 +3,7 @@ export const glossary: { term: string; def: string }[] = [
   { term: "Retorno", def: "Cuánto cambió el valor en un período, en porcentaje. De 100 a 110 es +10 %." },
   { term: "Volatilidad", def: "Cuánto se mueven los retornos alrededor de su promedio. Se mide con el desvío estándar." },
   { term: "Drawdown", def: "Cuánto estás debajo del máximo anterior. Si la cuenta llegó a 100 y hoy vale 80, el drawdown es −20 %." },
-  { term: "Sharpe", def: "Retorno promedio dividido por su volatilidad. Mide retorno por unidad de sacudón, no la forma de las pérdidas." },
+  { term: "Sharpe", def: "Retorno en exceso (sobre la tasa libre de riesgo) dividido por su volatilidad. Mide retorno por unidad de sacudón, no la forma de las pérdidas." },
   { term: "Backtest", def: "Simular una regla sobre datos pasados para ver cómo le habría ido." },
   { term: "In-sample / holdout", def: "Datos que usás para armar la regla / datos que guardás sin mirar para examinarla una sola vez." },
   { term: "Look-ahead", def: "Usar en la simulación información que en ese momento todavía no existía." },

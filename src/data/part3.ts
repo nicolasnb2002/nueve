@@ -99,7 +99,7 @@ export const part3: Concept[] = [
       },
       {
         kind: "p",
-        text: "Tarifa spot publicada por Binance para el usuario regular (volumen de 30 días menor a 1.000.000 USD), consultada el 10/10/2026 en https://www.binance.info/en-BH/fee: maker 0,100 % y taker 0,100 %. Pagando la comisión con BNB hay 25 % de descuento: 0,075 % y 0,075 %. Los niveles VIP bajan la tasa pero piden volumen y saldo en BNB que una cuenta chica no tiene. Las tarifas cambian: antes de usar estos números, volvé a mirar la página oficial.",
+        text: "Tarifa spot publicada por Binance para el usuario regular (volumen de 30 días menor a 1.000.000 USD), consultada el 10/10/2026 en https://www.binance.info/en-BH/fee: maker 0,100 % y taker 0,100 % en pares USDT (los pares USDC tienen otra tarifa). Pagando la comisión con BNB hay 25 % de descuento: 0,075 % y 0,075 %. Los niveles VIP bajan la tasa pero piden volumen y saldo en BNB que una cuenta chica no tiene. Las tarifas cambian: antes de usar estos números, volvé a mirar la página oficial.",
       },
       {
         kind: "formula",
@@ -121,7 +121,7 @@ export const part3: Concept[] = [
       },
       {
         kind: "p",
-        text: "Para el usuario regular, maker y taker pagan la misma tasa. La diferencia está en el spread: el taker lo cruza, el maker no (pero puede quedarse sin ejecutar). Contra el mid del libro de ayer, un ida y vuelta taker+taker cuesta 10 + 10 bps de medio spread más 10 + 10 bps de comisión: 40 bps. Con BNB, 35 bps. Maker en las dos puntas, si se llenan las dos: 20 bps.",
+        text: "Para el usuario regular, maker y taker pagan la misma tasa. La diferencia está en el spread: el taker lo cruza, el maker no (pero puede quedarse sin ejecutar). Contra el mid del libro del concepto anterior, un ida y vuelta taker+taker cuesta 10 + 10 bps de medio spread más 10 + 10 bps de comisión: 40 bps. Con BNB, 35 bps. Maker en las dos puntas, si se llenan las dos: pagás 20 bps de comisión (15 con BNB) pero cobrás el spread, así que contra el mid quedás cerca de 0 bps, siempre que el precio no se haya movido en contra mientras esperabas.",
       },
       {
         kind: "example",
@@ -315,7 +315,7 @@ export const part3: Concept[] = [
         rows: [
           { k: "Dato", v: "200 USDT de margen, largo a 10x, el precio cae 5 %" },
           { k: "Pérdida", v: "200 × 10 × 5 % = 100 USDT, la mitad de la cuenta" },
-          { k: "Si cae 9,5 %", v: "liquidado: perdés el margen entero" },
+          { k: "Si cae 9,5 %", v: "liquidado: perdés el margen entero (o casi: lo que queda suele irse en la comisión de liquidación)" },
         ],
       },
       { kind: "figure", id: "liq" },
@@ -334,7 +334,7 @@ export const part3: Concept[] = [
         why: "La posición es 2.000 USDT. 5 % de 2.000 = 100 USDT, la mitad de tu margen.",
       },
       {
-        q: "Perdiste 50 % de la cuenta. Para volver a cero necesitás ganar",
+        q: "Perdiste 50 % de la cuenta. Para volver al punto de partida necesitás ganar",
         options: ["50 %", "75 %", "100 %", "150 %"],
         answer: 2,
         why: "De 100 a 50 y de 50 a 100: hay que duplicar, +100 %.",

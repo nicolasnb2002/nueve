@@ -75,7 +75,9 @@ check("BTC recibido", 0.01 * (1 - TAKER), 5)
 half = spread / 2 / mid * 1e4
 check("taker+taker bps", 2 * half + 2 * TAKER * 1e4, 0, " bps")
 check("taker+taker BNB bps", 2 * half + 2 * TAKER_BNB * 1e4, 0, " bps")
-check("maker+maker bps", 2 * MAKER * 1e4, 0, " bps")
+check("maker+maker comisión bps", 2 * MAKER * 1e4, 0, " bps de comisión")
+check("maker+maker comisión BNB", 2 * MAKER * (1 - BNB_OFF) * 1e4, 0, " con BNB")
+check("maker+maker neto vs mid bps", abs(2 * MAKER * 1e4 - 2 * half), 0, " bps, siempre")
 
 # Ejercicio: 500 USDT, 20 idas y vueltas por mes
 monthly = 20 * 2 * 500 * TAKER
