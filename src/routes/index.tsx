@@ -21,6 +21,9 @@ function Home() {
           El paper, en orden. La base de finanzas ya la tenés. Esto es lo que viene después: dos conceptos
           por día, entre una y dos horas, cada uno con la idea, un número y un cuestionario corto.
         </p>
+        <p className="mt-4 border-l-2 border-line pl-3 text-sm text-muted" role="note">
+          Contenido educativo. No es asesoramiento financiero ni recomendación de inversión.
+        </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           {next ? (
             <Link to="/concepto/$id" params={{ id: next.id }} className="btn btn-primary">

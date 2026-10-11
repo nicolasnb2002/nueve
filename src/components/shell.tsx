@@ -24,7 +24,10 @@ export function Shell({ children }: { children: ReactNode }) {
       <main className="mx-auto w-full min-w-0 max-w-2xl px-5 pt-2 pb-24">{children}</main>
       <footer className="mx-auto w-full max-w-2xl px-5 pb-16">
         <p className="text-sm text-muted">
-          El progreso queda en este navegador. No es asesoramiento ni una recomendación de operar.
+          Contenido educativo. No es asesoramiento financiero ni recomendación de inversión.
+        </p>
+        <p className="mt-2 text-sm text-muted">
+          El progreso queda guardado solo en este dispositivo. Sin cuentas ni analíticas.
         </p>
         <button
           type="button"
