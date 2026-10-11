@@ -12,7 +12,7 @@ function Cierre() {
 
   return (
     <Shell>
-      <p className="kicker mt-8">Después de los dieciocho</p>
+      <p className="kicker mt-8">Al final del recorrido</p>
       <h1 className="mt-3 font-serif text-4xl leading-tight">PASA histórico, pendiente de forward.</h1>
       <p className="mt-4 font-serif text-xl text-muted italic">Nunca «funciona».</p>
 
@@ -31,6 +31,15 @@ function Cierre() {
         <p>
           <span className="text-fg">Funciona</span> sería una oración en futuro. Este recorrido existe para
           no decirla.
+        </p>
+      </div>
+
+      <div className="mt-8 border-l-2 border-line pl-3 text-sm text-muted">
+        <p className="text-fg">Caso de estudio opcional</p>
+        <p className="mt-1">
+          Este recorrido nació de un trabajo propio que aplica cada paso a una estrategia de tendencia y carry
+          en futuros. No hace falta leerlo: cada concepto se sostiene solo. Si lo usás, leelo como un ejemplo
+          de cómo se ve la frase del final aplicada, no como una recomendación.
         </p>
       </div>
 
@@ -57,10 +66,10 @@ function Cierre() {
       <div className="mt-10">
         {next ? (
           <Link to="/concepto/$id" params={{ id: next.id }} className="btn btn-primary">
-            Seguir · {done}/18
+            Seguir · {done}/{concepts.length}
           </Link>
         ) : (
-          <p className="text-pass">Recorriste los dieciocho. La frase ya es tuya.</p>
+          <p className="text-pass">Recorriste los {concepts.length}. La frase ya es tuya.</p>
         )}
       </div>
     </Shell>

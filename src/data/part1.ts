@@ -21,15 +21,15 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "La media es el centro. Una estrategia puede tener una media linda y aun así ser una mala apuesta si el daño vive en un solo mes. La volatilidad es el desvío estándar de los retornos. Anualizar un desvío mensual, si los retornos fueran independientes, es multiplicar por √12, no por 12. Anualizar un desvío diario es multiplicar por √252. Esa raíz es una traducción, no una ley: con colas gordas y rachas, el año no se comporta como doce meses independientes pegados.",
+        text: "La media es el centro. Una estrategia puede tener una media linda y aun así ser una mala apuesta si el daño vive en un solo mes. La volatilidad es el desvío estándar de los retornos. Anualizar un desvío mensual, si los retornos fueran independientes, es multiplicar por √12, no por 12. Anualizar un desvío diario es multiplicar por √252 si el activo cotiza solo días hábiles, y por √365 si cotiza todos los días, como cripto (algunos usan 261). Lo que importa es que k coincida con la frecuencia real de los datos. Esa raíz es una traducción, no una ley: con colas gordas y rachas, el año no se comporta como doce meses independientes pegados.",
       },
       {
         kind: "formula",
-        text: "σ_anual ≈ σ_período × √k\n\nk = 12 si el período es un mes, 252 si es un día de mercado.",
+        text: "σ_anual ≈ σ_período × √k\n\nk = 12 si el período es un mes, 252 si es un día de mercado de lunes a viernes, 365 si es un día de cripto (24/7).",
       },
       {
         kind: "p",
-        text: "La asimetría (skew) dice qué cola es más larga. Negativa: la izquierda, la que duele. Positiva: la derecha, la de los pocos aciertos grandes. En la literatura de futuros, el momentum de series de tiempo suele cargar asimetría positiva (muchas pérdidas chicas, pocas ganancias grandes) y el carry o el short de volatilidad suelen cargar la negativa. Es un hecho estilizado, no una garantía de la fase 3.",
+        text: "La asimetría (skew) dice qué cola es más larga. Negativa: la izquierda, la que duele. Positiva: la derecha, la de los pocos aciertos grandes. En la literatura de futuros, el momentum de series de tiempo suele cargar asimetría positiva (muchas pérdidas chicas, pocas ganancias grandes) y el carry o el short de volatilidad suelen cargar la negativa. Es un hecho estilizado, no una garantía para tu estrategia.",
       },
       {
         kind: "p",
@@ -81,7 +81,7 @@ export const part1: Concept[] = [
         why: "Curtosis 3 es la normal (exceso de curtosis 0). Por encima de 3, las colas están más gordas que la campana. Ojo: algunos softwares reportan el exceso, no la curtosis cruda.",
       },
       {
-        q: "Dos estrategias tienen la misma media y el mismo desvío. Una tiene asimetría −1,5 y la otra 0. ¿Cuál desconfía más el filtro del paper?",
+        q: "Dos estrategias tienen la misma media y el mismo desvío. Una tiene asimetría −1,5 y la otra 0. ¿Cuál desconfía más un filtro que mira la forma de la distribución?",
         options: [
           "Ninguna: el Sharpe ya las resume",
           "La de asimetría 0, porque es «demasiado normal»",
@@ -127,7 +127,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "El Sharpe no contiene este número. Dos curvas con el mismo Sharpe pueden tener un MaxDD tolerable o uno que no se puede holdear. En un libro con volatilidad objetivo alta —el 40% por instrumento del diseño— un MaxDD profundo no es una sorpresa matemática: es la pregunta de si el edge, si existe, es operable por un humano. Reportar el retorno sin el MaxDD y sin el tiempo bajo el agua es contar solo la mitad.",
+        text: "El Sharpe no contiene este número. Dos curvas con el mismo Sharpe pueden tener un MaxDD tolerable o uno que no se puede holdear. En un libro con volatilidad objetivo alta —por ejemplo, 40% por instrumento, como en el diseño de ejemplo del día 7— un MaxDD profundo no es una sorpresa matemática: es la pregunta de si el edge, si existe, es operable por un humano. Reportar el retorno sin el MaxDD y sin el tiempo bajo el agua es contar solo la mitad.",
       },
       {
         kind: "note",
@@ -212,7 +212,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "La convención honesta por defecto: la señal se calcula con información hasta el cierre de t, y la orden se ejecuta en t+1 (el open, o el close siguiente, congelado de antemano). Llenar en el cierre de t supone que operaste el precio que fabricó la señal, cuando ese precio recién existe al terminar la barra. Sin un modelo intradiario de verdad, t+1 es la regla. El paper la nombra porque es la diferencia entre una curva que se puede discutir y una que ya se mintió.",
+        text: "La convención honesta por defecto: la señal se calcula con información hasta el cierre de t, y la orden se ejecuta en t+1 (el open, o el close siguiente, congelado de antemano). Llenar en el cierre de t supone que operaste el precio que fabricó la señal, cuando ese precio recién existe al terminar la barra. Sin un modelo intradiario de verdad, t+1 es la regla. Se nombra porque es la diferencia entre una curva que se puede discutir y una que ya se mintió.",
       },
       {
         kind: "example",
@@ -511,7 +511,7 @@ export const part1: Concept[] = [
           "Porque la curtosis baja con cada intento",
         ],
         answer: 1,
-        why: "Aunque cada Sharpe tenga media cero, el máximo no la tiene. Crece con el logaritmo de N. La simplicidad de cada regla no cancela el concurso.",
+        why: "Aunque cada Sharpe tenga media cero, el máximo no la tiene: crece aproximadamente como √(2·ln N), lento pero sin techo. La simplicidad de cada regla no cancela el concurso.",
       },
       {
         q: "Un lookback de 11 meses luce y los de 10 y 12 no. Eso huele a",
@@ -553,7 +553,7 @@ export const part1: Concept[] = [
         kind: "ul",
         items: [
           "No es el tamaño del edge. Una media diminuta en una muestra enorme puede tener un p chiquito. Un Sharpe escandaloso en 14 meses puede tener un p mediocre.",
-          "Asume un solo test, decidido antes. Si hubo una búsqueda, el p de la ganadora está inflado: es demasiado chico, demasiado optimista.",
+          "Asume un solo test, decidido antes. Si hubo una búsqueda, el p de la ganadora es engañosamente chico: demasiado optimista.",
           "Asume el modelo de los retornos. Colas gordas, retornos superpuestos y varianza que cambia hacen que el p de manual mienta.",
           "«Significativo» es un umbral que elegiste (muchas veces 0,05), no una propiedad del mercado.",
         ],
@@ -569,7 +569,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "note",
-        text: "En el veredicto: un p lindo sobre la ganadora de una búsqueda no alcanza para «PASA». El paper no se apoya en el p crudo. Lo reemplaza, en el centro, por un filtro que sabe cuántas veces preguntaste.",
+        text: "En el veredicto: un p lindo sobre la ganadora de una búsqueda no alcanza para «PASA». Un método serio no se apoya en el p crudo. Lo reemplaza, en el centro, por un filtro que sabe cuántas veces preguntaste.",
       },
       { kind: "figure", id: "pval" },
     ],
@@ -639,7 +639,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "Tenés una señal decidida antes del retorno, y un retorno de mercado. El PnL es señal por retorno. Bajo la nula de que la señal no tiene timing, cualquier apareamiento es igual de válido. Entonces mezclás el orden: los retornos y las señales siguen siendo los mismos, pero se rompe el calendario. Recalculás el Sharpe miles de veces. Si el Sharpe real es raro en esa nube, el alineamiento traía información. Eso es un mercado sin edge de timing.",
+        text: "Tenés una señal decidida antes del retorno, y un retorno de mercado. El PnL es señal por retorno. Bajo la nula de que la señal no tiene timing, cualquier apareamiento es igual de válido. Entonces mezclás el orden: los retornos y las señales siguen siendo los mismos, pero se rompe el calendario. Cada permutación es un mercado sin edge de timing. Recalculás el Sharpe miles de veces. Si el Sharpe real es raro en esa nube, el alineamiento traía información.",
       },
       {
         kind: "h",
@@ -647,7 +647,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "Multiplicás cada retorno de la estrategia por un +1 o un −1 al azar. Las magnitudes se quedan —un golpe sigue siendo un golpe— y la dirección se borra. Sirve para preguntar si el promedio es solo una racha de signos. Flips independientes también destruyen la autocorrelación; un flip por bloques conserva los racimos de volatilidad. Tenés que saber cuál de las dos nulas estás usando.",
+        text: "Multiplicás cada retorno de la estrategia por un +1 o un −1 al azar. Las magnitudes se quedan —un golpe sigue siendo un golpe— y la dirección se borra. Sirve para preguntar si el promedio es solo una racha de signos. Flips independientes destruyen la autocorrelación de los signos (las rachas); los racimos de volatilidad se conservan igual, porque las magnitudes no se tocan. Un flip por bloques conserva además la dependencia de corto plazo dentro de cada bloque. Tenés que saber cuál de las dos nulas estás usando.",
       },
       {
         kind: "h",
@@ -743,7 +743,7 @@ export const part1: Concept[] = [
       },
       {
         kind: "p",
-        text: "Bonferroni es la versión brusca: usá 0,05 / N. Es simple y conservador cuando los tests no son independientes. El filtro central del paper no es ese corte duro: es el Deflated Sharpe, que sube el obstáculo de forma continua con N. Pero el DSR come el N que le des. Un intento fallido que no anotaste vuelve al DSR más optimista que la búsqueda real.",
+        text: "Bonferroni es la versión brusca: usá 0,05 / N. Es simple y conservador cuando los tests no son independientes. El filtro central de este recorrido no es ese corte duro: es el Deflated Sharpe, que sube el obstáculo de forma continua con N. Pero el DSR come el N que le des. Un intento fallido que no anotaste vuelve al DSR más optimista que la búsqueda real.",
       },
       {
         kind: "ul",

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { concepts, conceptsForDay, days, formatSpan, totalMinutes } from "@/data/curriculum";
+import { conceptCount, concepts, conceptsForDay, dayCount, days, formatSpan, totalMinutes } from "@/data/curriculum";
 import { Shell } from "@/components/shell";
 import { useProgress } from "@/lib/progress";
 
@@ -14,12 +14,16 @@ function Home() {
     <Shell>
       <div className="pt-8">
         <p className="kicker">
-          18 conceptos · 9 días · {formatSpan(totalMinutes)}
+          {conceptCount} conceptos · {dayCount} días · {formatSpan(totalMinutes)}
         </p>
         <h1 className="mt-3 font-serif text-5xl leading-none tracking-tight">Nueve</h1>
         <p className="mt-5 text-lg text-muted">
-          El paper, en orden. La base de finanzas ya la tenés. Esto es lo que viene después: dos conceptos
-          por día, entre una y dos horas, cada uno con la idea, un número y un cuestionario corto.
+          Cómo saber si una estrategia de inversión funciona de verdad o solo parece, y cómo operar cripto
+          sin regalar plata en costos. Pensado para estudiantes y para cualquiera que arranque de cero: dos
+          conceptos por día, cada uno con la idea en criollo, un ejemplo con números chicos y un cuestionario corto.
+        </p>
+        <p className="mt-4 border-l-2 border-line pl-3 text-sm text-muted" role="note">
+          Contenido educativo. No es asesoramiento financiero ni recomendación de inversión.
         </p>
         <div className="mt-6 flex flex-wrap items-center gap-3">
           {next ? (
@@ -31,18 +35,21 @@ function Home() {
               Volver al veredicto
             </Link>
           )}
+          <Link to="/glosario" className="btn btn-ghost">
+            Glosario
+          </Link>
         </div>
         <div
           className="mt-5 h-1 bg-elevated"
           role="progressbar"
           aria-valuenow={done}
           aria-valuemin={0}
-          aria-valuemax={18}
+          aria-valuemax={conceptCount}
           aria-label="Conceptos entendidos"
         >
-          <div className="h-full bg-mark" style={{ width: `${(done / 18) * 100}%` }} />
+          <div className="h-full bg-mark" style={{ width: `${(done / conceptCount) * 100}%` }} />
         </div>
-        <p className="mt-2 text-sm text-muted">{done} de 18 entendidos. Hace falta acertar 3 de 4.</p>
+        <p className="mt-2 text-sm text-muted">{done} de {conceptCount} entendidos. Hace falta acertar 3 de 4.</p>
       </div>
 
       <ol className="mt-10">
@@ -90,7 +97,7 @@ function Home() {
         <Link to="/cierre" className="link-row inline-flex py-2">
           <span className="link-title font-serif text-xl">La frase del final</span>
         </Link>
-        <p className="text-sm text-muted">Mejor después del día 9. Se puede leer antes: no es un secreto, es el punto.</p>
+        <p className="text-sm text-muted">Mejor después del día 9 (los días 10 y 11 son la parte práctica de cripto). Se puede leer antes: no es un secreto, es el punto.</p>
       </div>
     </Shell>
   );

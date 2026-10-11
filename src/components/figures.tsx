@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { CryptoFigure } from "@/components/figures-crypto";
 import { histogram, HistPanel, LinePanel } from "@/components/charts";
 import { Panel, Slider, Stats } from "@/components/ui";
 import {
@@ -823,6 +824,11 @@ export function Figure({ id }: { id: string }) {
       return <PowerFig />;
     case "harness":
       return <HarnessFig />;
+    case "book":
+    case "fees":
+    case "slip":
+    case "liq":
+      return <CryptoFigure id={id} />;
     default:
       return null;
   }

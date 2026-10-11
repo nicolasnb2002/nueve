@@ -1,0 +1,21 @@
+/** Intro «en criollo» para cada concepto de los días 1 a 9: la idea sin jerga. */
+export const criollo: Record<string, string> = {
+  "01": "Un solo número de rendimiento esconde cómo se reparten las ganancias y las pérdidas. Acá miramos la forma entera: cuánto se mueve y si las caídas grandes son más frecuentes que las subas grandes.",
+  "02": "El drawdown es lo que duele: cuánto bajaste desde el mejor momento y cuánto tardaste en volver. Dos estrategias con el mismo promedio pueden hacerte sufrir muy distinto.",
+  "03": "Un backtest es una simulación del pasado, y es fácil hacerla trampa sin querer: usar datos que todavía no existían, o ignorar las empresas que quebraron.",
+  "04": "Separás los datos en partes: con unas armás la regla y otra la guardás bajo llave para el examen final. Si la espiás, deja de servir.",
+  "05": "En vez de un único examen, la regla avanza en el tiempo: se ajusta con el pasado y se prueba con lo que viene después, una y otra vez.",
+  "06": "Si probás cien variantes al azar, alguna va a parecer genial por pura suerte. Eso es sobreajuste: la regla aprendió el ruido.",
+  "07": "La hipótesis nula es «no hay nada, es suerte». El p-valor dice qué tan raro sería tu resultado si eso fuera cierto. No dice la probabilidad de que tengas razón.",
+  "08": "Tres maneras de fabricar «mundos de pura suerte» con tus propios datos para ver si tu resultado se destaca entre ellos.",
+  "09": "Cada variante que probaste cuenta. Anotarlas todas (el ledger) es lo que permite corregir por haber buscado mucho.",
+  "10": "Una vara que se pone más alta cuantas más cosas probaste: tu Sharpe tiene que superar al mejor que habría salido por azar.",
+  "11": "Escribir la regla antes de mirar los resultados y guardar una huella digital del texto, para que nadie (ni vos) pueda cambiarla después sin que se note.",
+  "12": "Los futuros vencen. Para armar una serie larga se empalman contratos, y el salto de precio entre uno y otro no es ganancia ni pérdida tuya.",
+  "13": "Dos ideas clásicas: tendencia (lo que viene subiendo suele seguir un rato) y carry (lo que se cobra por sostener la posición).",
+  "14": "Ajustar el tamaño de cada apuesta según cuánto se mueve el activo, para que ninguno domine el resultado.",
+  "15": "Las comisiones y el spread se cobran en cada operación. Una estrategia que opera mucho puede perder todo su borde en costos.",
+  "16": "Seguir la regla en tiempo real, sin plata, sobre datos que no existían cuando la escribiste. Es la única prueba que no se pudo acomodar.",
+  "17": "¿Cuántos años de datos hacen falta para distinguir una ventaja real de la suerte? Más de los que uno cree, sobre todo si la ventaja es chica.",
+  "18": "Antes de confiar en tu banco de pruebas, chequeás que detecte una ventaja que vos plantaste y que rechace estrategias que sabés que son ruido.",
+};

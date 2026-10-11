@@ -1,8 +1,9 @@
 import { part1 } from "@/data/part1";
 import { part2 } from "@/data/part2";
+import { part3 } from "@/data/part3";
 import type { Concept, Day } from "@/data/types";
 
-export const concepts: Concept[] = [...part1, ...part2];
+export const concepts: Concept[] = [...part1, ...part2, ...part3];
 
 const dayMeta: Omit<Day, "minutes">[] = [
   {
@@ -59,12 +60,28 @@ const dayMeta: Omit<Day, "minutes">[] = [
     aim: "Medir si hay años de sobra, y no creerle a un motor que no pasó los controles.",
     say: "t ≈ Sharpe × √años, por eso siete años de cripto no cierran solos. El banco tiene que ver el edge plantado y rechazar los cincuenta sin edge. Recién ahí el histórico se puede decir, y el forward sigue pendiente.",
   },
+  {
+    n: 10,
+    title: "Cripto: el libro y la comisión",
+    aim: "Leer un libro de órdenes, medir el spread, distinguir maker de taker y calcular la comisión spot real de Binance, con y sin BNB.",
+    say: "El precio de pantalla es el mid. Cruzar cuesta medio spread, y la comisión regular es 0,100 % por lado (0,075 % con BNB), repetida en cada operación.",
+  },
+  {
+    n: 11,
+    title: "Cripto: ejecución y riesgo",
+    aim: "Calcular el slippage de una orden de mercado, elegir entre límite y mercado, entender el riesgo de custodia y hacer la cuenta de liquidación.",
+    say: "Mercado garantiza ejecución, límite garantiza precio. A 10x, una caída de 9,5 % me liquida: una cuenta chica opera spot y sin apalancamiento.",
+  },
 ];
+
+export const conceptCount = concepts.length;
 
 export const days: Day[] = dayMeta.map((d) => ({
   ...d,
   minutes: concepts.filter((c) => c.day === d.n).reduce((s, c) => s + c.minutes, 0),
 }));
+
+export const dayCount = days.length;
 
 export const totalMinutes = days.reduce((s, d) => s + d.minutes, 0);
 
