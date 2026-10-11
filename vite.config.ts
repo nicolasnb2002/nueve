@@ -174,10 +174,9 @@ export default defineConfig(({ command, isPreview }) => ({
     tanstackStart(
       githubPages
         ? {
-            spa: {
-              enabled: true,
-              prerender: { outputPath: "/index", crawlLinks: false },
-            },
+            // Every route is prerendered with its real content, so hydration
+            // matches. A bare SPA shell at "/" caused React #418 there.
+            prerender: { enabled: true, crawlLinks: true, failOnError: true },
             router: { basepath: "/nueve" },
           }
         : {},
